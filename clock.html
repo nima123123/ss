@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ساعت لایو</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      color: #0f0;
+      font-family: Tahoma, sans-serif;
+    }
+    #clock {
+      font-size: 18vw;
+      font-weight: bold;
+      text-shadow: 0 0 20px #0f0;
+      letter-spacing: 8px;
+    }
+    #info {
+      font-size: 6vw;
+      margin-top: 30px;
+      color: #0a0;
+    }
+  </style>
+</head>
+<body>
+  <div id="clock">00:00</div>
+  <div id="info">در حال بارگذاری...</div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      
+      // ساعت و دقیقه جداگانه
+      const hour = now.getHours().toString().padStart(2, '0');     // 00 تا 23
+      const minute = now.getMinutes().toString().padStart(2, '0'); // 00 تا 59
+      
+      // نمایش ساعت کامل
+      document.getElementById('clock').textContent = `${hour}:${minute}`;
+      
+      // متغیرهای جهانی برای App Inventor
+      window.currentHour = hour;       // فقط ساعت (مثل "14")
+      window.currentMinute = minute;   // فقط دقیقه (مثل "30")
+      
+      document.getElementById('info').textContent = `ساعت: ${hour} | دقیقه: ${minute}`;
+    }
+
+    // هر ثانیه آپدیت کن
+    setInterval(updateClock, 1000);
+    updateClock(); // اولین بار
+  </script>
+</body>
+</html>
