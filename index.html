@@ -34,27 +34,29 @@
   <div id="info">در حال بارگذاری...</div>
 
   <script>
-    function updateClock() {
-      const now = new Date();
-      
-      // ساعت و دقیقه جداگانه
-      const hour = now.getHours().toString().padStart(2, '0');     // 00 تا 23
-      const minute = now.getMinutes().toString().padStart(2, '0'); // 00 تا 59
-      
-      // نمایش ساعت کامل
-      document.getElementById('clock').textContent = `${hour}:${minute}`;
-      
-      // متغیرهای جهانی برای App Inventor
-      window.currentHour = hour;       // فقط ساعت (مثل "14")
-      window.currentMinute = minute;   // فقط دقیقه (مثل "30")
-      
-      document.getElementById('info').textContent = `ساعت: ${hour} | دقیقه: ${minute}`;
-    }
+  function updateClock() {
+    const now = new Date();
 
-    // هر ثانیه آپدیت کن
-    setInterval(updateClock, 1000);
-    updateClock(); // اولین بار
-  </script>
+    const hour = now.getHours().toString().padStart(2, '0');
+    const minute = now.getMinutes().toString().padStart(2, '0');
+
+    document.getElementById('clock').textContent = `${hour}:${minute}`;
+    document.getElementById('info').textContent = `ساعت: ${hour} | دقیقه: ${minute}`;
+
+    // ارسال ساعت عادی
+    window.AppInventor.setWebViewString(hour + ":" + minute);
+
+    // 🎯 شرط اجرای عملیات
+    if (hour === "14" && minute === "30") {
+      window.AppInventor.setWebViewString("DO_ACTION");
+    }
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
 </body>
 
 </html>
+
